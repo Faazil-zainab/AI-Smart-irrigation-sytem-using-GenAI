@@ -36,7 +36,7 @@ This system addresses these challenges using ML predictions and GenAI explanatio
 - **Model Persistence**: joblib
 
 ### Generative AI
-- **Engine**: HuggingFace Transformers (BART/FLAN-T5)
+- **Engine**: HuggingFace Transformers (FLAN-T5)
 - **Deep Learning**: PyTorch
 - **Tasks**: Text generation, summarization, explanation
 
@@ -173,6 +173,49 @@ ai-irrigation-system/
    npm start
    ```
    Dashboard will open at: `http://localhost:3000`
+
+---
+
+## ⏱️ Real-Time Usage (How This Works in Live Farming)
+
+This project is built for practical day-to-day irrigation decisions using current field conditions.
+
+### Real-Time Workflow
+
+1. **Collect field data**
+   - Farmer enters live values from sensors or manual readings:
+   - Temperature, humidity, soil moisture, rainfall, crop type
+   - Optional: farm location (latitude/longitude) and soil erosion risk
+
+2. **Send data to API instantly**
+   - Frontend sends request to FastAPI:
+   - `POST /api/predict-irrigation`
+
+3. **Generate recommendation in backend**
+   - Backend prepares and scales features
+   - RandomForest model predicts water requirement in mm
+   - Service computes watering frequency and best irrigation time
+   - GenAI generates a farmer-friendly explanation (fallback text is used if GenAI is disabled)
+
+4. **Show actionable output on dashboard**
+   - Recommended water amount (`water_requirement_mm`)
+   - Watering frequency (`watering_frequency_days`)
+   - Best time to irrigate (`best_time_of_day`)
+   - Alert severity and action plan
+   - Water-saving optimization strategy
+
+5. **Take immediate action in the field**
+   - Farmer applies irrigation plan
+   - Team can re-enter updated values and get a fresh recommendation in seconds
+
+### Example Real-Time Scenario
+
+- A wheat farm reports: 32°C temperature, 35% humidity, 28% soil moisture, and no recent rain.
+- The system predicts higher water demand and returns a near-term watering schedule.
+- Alert endpoint marks risk as high and recommends urgent irrigation.
+- Optimization endpoint suggests drip configuration and conservation tips to reduce waste.
+
+This loop supports continuous monitoring and rapid decision-making, especially during heat waves, drought windows, or changing weather patterns.
 
 ---
 
@@ -551,13 +594,10 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 For issues, questions, or suggestions:
 - Create GitHub issue
-- Email: support@irrigation-ai.com
 - Documentation: See DEPLOYMENT.md and API docs
 
 ---
 
 **Version**: 1.0.0  
-**Last Updated**: April 2, 2024  
-**Status**: Production Ready ✅
-
-# AI-Smart-irrigation-sytem-using-GenAI
+**Last Updated**: April 3, 2026  
+**Status**: Active Development
