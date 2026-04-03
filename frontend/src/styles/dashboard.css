@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+
+/* Global Styles for AI Irrigation Dashboard */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #167c50;
+  --primary-dark: #0f5b3b;
+  --primary-light: #44b57d;
+  --secondary-color: #1d4ed8;
+  --accent-color: #d97706;
+  --danger-color: #dc4c64;
+  --warning-color: #d97706;
+  --success-color: #16a34a;
+  --background-color: #eef4ef;
+  --surface-color: rgba(255, 255, 255, 0.78);
+  --card-background: rgba(255, 255, 255, 0.92);
+  --text-primary: #11211b;
+  --text-secondary: #5c6f68;
+  --border-color: rgba(17, 33, 27, 0.1);
+  --shadow-sm: 0 10px 24px rgba(17, 33, 27, 0.08);
+  --shadow-md: 0 18px 42px rgba(17, 33, 27, 0.12);
+  --shadow-lg: 0 26px 64px rgba(17, 33, 27, 0.18);
+  --transition: all 220ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Manrope', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(22, 124, 80, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(29, 78, 216, 0.08), transparent 24%),
+    linear-gradient(180deg, #f7faf8 0%, #eef4ef 54%, #e7f0eb 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 33, 27, 0.08);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-light), var(--primary-dark));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark), var(--secondary-color));
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  border: 4px solid rgba(17, 33, 27, 0.08);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+/* Responsive tuning */
+@media (max-width: 768px) {
+  :root {
+    --shadow-sm: 0 8px 18px rgba(17, 33, 27, 0.08);
+    --shadow-md: 0 14px 32px rgba(17, 33, 27, 0.12);
+    --shadow-lg: 0 20px 44px rgba(17, 33, 27, 0.16);
+  }
+}

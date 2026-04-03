@@ -1,0 +1,188 @@
+/* Strategy Card Styles */
+
+.strategy-card {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  height: 100%;
+  overflow-y: auto;
+  transition: var(--transition);
+}
+
+.strategy-card:hover:not(.empty):not(.loading) {
+  box-shadow: var(--shadow-lg);
+}
+
+.strategy-card.empty,
+.strategy-card.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.strategy-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.strategy-card h3 {
+  color: var(--text-primary);
+  margin-top: 16px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.savings-section {
+  background: linear-gradient(135deg, var(--success-color), var(--primary-light));
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.savings-section h3 {
+  color: white;
+  margin-top: 0;
+}
+
+.savings-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.metric {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+.drip-setup-section {
+  background-color: #f0f8ff;
+  border-left: 4px solid var(--secondary-color);
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.drip-setup-section h3 {
+  color: var(--secondary-color);
+  margin-top: 0;
+}
+
+.drip-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.1);
+  align-items: center;
+  font-size: 15px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-row .value {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.tips-section {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid var(--accent-color);
+}
+
+.tips-section h3 {
+  color: var(--accent-color);
+  margin-top: 0;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tip-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 152, 0, 0.1);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.tip-item:last-child {
+  border-bottom: none;
+}
+
+/* Scrollbar styling for card */
+.strategy-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.strategy-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.strategy-card::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 999px;
+}
+
+.strategy-card::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .savings-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

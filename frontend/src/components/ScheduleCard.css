@@ -1,0 +1,217 @@
+/* Schedule Card Styles */
+
+.schedule-card {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  height: 100%;
+  overflow-y: auto;
+  transition: var(--transition);
+}
+
+.schedule-card:hover:not(.empty) {
+  box-shadow: var(--shadow-lg);
+}
+
+.schedule-card.empty {
+  min-height: 300px;
+  color: var(--text-secondary);
+  font-style: italic;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef7ff 100%);
+}
+
+.schedule-empty-wrap {
+  background: white;
+  border: 1px solid #dbe9ff;
+  border-radius: 14px;
+  padding: 24px 18px;
+  max-width: 320px;
+  box-shadow: 0 10px 24px rgba(18, 93, 171, 0.08);
+}
+
+.schedule-empty-wrap h5 {
+  color: #165a9c;
+  font-weight: 700;
+}
+
+.schedule-empty-wrap p {
+  color: #5f7389;
+}
+
+.schedule-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.schedule-card h3 {
+  color: var(--text-primary);
+  margin: 16px 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.schedule-status-badge {
+  background: linear-gradient(135deg, #1d9a5a, #1688ae);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  padding: 8px 12px;
+}
+
+.schedule-summary {
+  background: linear-gradient(135deg, var(--secondary-color), #64B5F6);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.summary-item .label {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.summary-item .value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.schedule-calendar {
+  margin-bottom: 20px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.calendar-day {
+  background-color: #ffffff;
+  border: 1px solid #dce8f7;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.calendar-day:hover {
+  border-color: #0f8a53;
+  box-shadow: 0 0 0 2px rgba(18, 159, 102, 0.12);
+  transform: translateY(-2px);
+}
+
+.calendar-day .date {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.irrigate-indicator {
+  font-size: 1.6rem;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  border-radius: 6px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.calendar-day .time {
+  font-size: 13px;
+  color: #516778;
+  font-weight: 700;
+}
+
+.schedule-tips {
+  background: linear-gradient(180deg, #fffcec 0%, #fff8db 100%);
+  border-left: 4px solid #e08400;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.schedule-tips h3 {
+  color: #e08400;
+  margin-top: 0;
+}
+
+.schedule-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule-tips li {
+  padding: 10px 0 10px 24px;
+  position: relative;
+  color: #243444;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 193, 7, 0.1);
+  background: transparent;
+}
+
+.schedule-tips li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--success-color);
+  font-weight: 700;
+}
+
+.schedule-tips li:last-child {
+  border-bottom: none;
+}
+
+/* Scrollbar for card */
+.schedule-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.schedule-card::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 999px;
+}
+
+.schedule-card::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .schedule-card {
+    padding: 16px;
+  }
+}

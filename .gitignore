@@ -1,0 +1,111 @@
+# Git Ignore Rules
+# AI Smart Irrigation System
+
+# Python Virtual Environment
+venv/
+.venv/
+.venv*/
+env/
+ENV/
+*.py[cod]
+__pycache__/
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ML Model Artifacts (large files - regenerate on demand)
+# Uncomment if storing models in repo is not desired
+# models/*.pkl
+# models/*.joblib
+
+# IDE and Editor Configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Frontend Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+.yarn/
+.npm
+
+# React Build
+frontend/build/
+frontend/dist/
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+secrets.txt
+
+# OS Files
+Thumbs.db
+.DS_Store
+*.log
+logs/
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary Files
+*.tmp
+*.bak
+*.swp
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# HuggingFace Model Cache (large, regenerates on first use)
+~/.cache/huggingface/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# Miscellaneous
+*.ctags
+tags
+.python-version
+Pipfile.lock
+poetry.lock
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Data Files (optional)
+# dataset/*.csv  # Uncomment to ignore large datasets
+
+# Production Build Artifacts
+dist/
+build/
+*.egg-info/

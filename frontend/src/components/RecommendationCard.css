@@ -1,0 +1,156 @@
+/* Recommendation Card Styles */
+
+.recommendation-card {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  overflow-y: auto;
+}
+
+.recommendation-card:hover:not(.empty):not(.loading) {
+  box-shadow: var(--shadow-lg);
+}
+
+.recommendation-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommendation-card.empty,
+.recommendation-card.loading {
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.recommendation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.crop-badge {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.water-requirement-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.water-gauge {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.recommendation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-item .label {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.detail-item .value {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.confidence-bar {
+  width: 100px;
+  height: 6px;
+  background-color: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.explanation-box {
+  background-color: #f5f5f5;
+  border-left: 4px solid var(--primary-color);
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: auto;
+}
+
+.explanation-box h3 {
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.explanation-box p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.recommendation-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recommendation-card::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 999px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .water-requirement-display {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .water-gauge {
+    width: 120px;
+    height: 120px;
+  }
+}
