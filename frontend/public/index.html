@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-type="software">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#4CAF50" />
-    <meta name="description" content="AI Smart Irrigation Recommendation System - ML-powered predictions with GenAI explanations" />
-    
-    <title>AI Smart Irrigation System</title>
-    
+    <meta name="theme-color" content="#05070c" />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="description" content="Fieldwise — live weather, crop context and model-backed irrigation guidance, presented as a lunar mission-control surface." />
+
+    <title>Fieldwise — Precision irrigation, orchestrated</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&family=Manrope:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="/layers/d/sky.webp" media="(min-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/layers/m/sky.webp" media="(max-width: 767px)" fetchpriority="high" />
+
     <style>
         * {
             margin: 0;
@@ -17,9 +28,8 @@
 
         html, body {
             width: 100%;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            min-height: 100%;
+            background: #05070c;
         }
 
         #root {
@@ -27,29 +37,20 @@
             min-height: 100vh;
         }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-                sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        code {
-            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-                monospace;
-        }
-
-        /* Loading spinner while JS loads */
+        /* Loading screen while the bundle boots. */
         .js-loading {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #4CAF50, #388E3C);
-            color: white;
-            font-size: 1.2rem;
+            background:
+                radial-gradient(60% 50% at 50% 40%, rgba(28, 44, 70, 0.6), transparent 70%),
+                #05070c;
+            color: #c9ccd3;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
         }
 
         .spinner-container {
@@ -57,13 +58,13 @@
         }
 
         .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            border: 1px solid rgba(201, 204, 211, 0.18);
+            border-top-color: #6fb6ff;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 22px;
         }
 
         @keyframes spin {
@@ -71,24 +72,28 @@
             100% { transform: rotate(360deg); }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation-duration: 3s; }
+        }
+
         noscript {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
-            color: #d32f2f;
-            font-size: 1.1rem;
-            font-weight: 500;
+            background-color: #05070c;
+            font-family: 'Manrope', sans-serif;
+            color: #c9ccd3;
+            font-size: 1.05rem;
+            padding: 40px;
         }
     </style>
 </head>
 <body>
     <noscript>
-        <div style="padding: 40px; text-align: center; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #d32f2f; margin-bottom: 20px;">JavaScript is disabled</h1>
-            <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings to use the AI Smart Irrigation System.</p>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #6fb6ff; margin-bottom: 20px; font-size: 1.4rem; letter-spacing: 0.08em;">JavaScript is disabled</h1>
+            <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings to use the Fieldwise irrigation system.</p>
         </div>
     </noscript>
 
@@ -96,12 +101,11 @@
         <div class="js-loading">
             <div class="spinner-container">
                 <div class="spinner"></div>
-                <p>Loading AI Irrigation System...</p>
+                <p>Fieldwise · initialising telemetry</p>
             </div>
         </div>
     </div>
 
-    <!-- React DOM will mount here -->
-    <!-- The following line is replaced by the build process -->
+    <!-- React mounts here and replaces the loading surface above. -->
 </body>
 </html>

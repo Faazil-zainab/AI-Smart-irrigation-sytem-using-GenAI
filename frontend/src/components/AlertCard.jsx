@@ -18,7 +18,7 @@ const AlertCard = ({ alert, loading }) => {
   if (!alert) {
     return (
       <div className="alert-card empty">
-        <p>⚠️  Alert information will appear here</p>
+        <p>Field alerts will appear here once the model has run.</p>
       </div>
     );
   }
@@ -26,30 +26,30 @@ const AlertCard = ({ alert, loading }) => {
   const getSeverityColor = (severity) => {
     switch (severity.toLowerCase()) {
       case 'critical':
-        return '#D32F2F';
+        return '#ff8f7a';
       case 'high':
-        return '#F57C00';
+        return '#f2b36b';
       case 'medium':
-        return '#FBC02D';
+        return '#f2e6c9';
       case 'low':
-        return '#388E3C';
+        return '#8fd6b4';
       default:
-        return '#666';
+        return '#8b909b';
     }
   };
 
   const getSeverityIcon = (severity) => {
     switch (severity.toLowerCase()) {
       case 'critical':
-        return '🚨';
+        return '!!';
       case 'high':
-        return '⚠️';
+        return '▲';
       case 'medium':
-        return '⚡';
+        return '◆';
       case 'low':
-        return '✓';
+        return '●';
       default:
-        return 'ℹ️';
+        return 'i';
     }
   };
 
@@ -60,7 +60,7 @@ const AlertCard = ({ alert, loading }) => {
         style={{ borderLeftColor: getSeverityColor(alert.severity) }}
       >
         <span className="severity-icon">{getSeverityIcon(alert.severity)}</span>
-        <h2>Alert System</h2>
+        <h2>Field alert</h2>
       </div>
 
       <div className="alert-content">
@@ -73,7 +73,7 @@ const AlertCard = ({ alert, loading }) => {
         </div>
 
         <div className="recommended-action">
-          <h3>🎯 Recommended Action:</h3>
+          <h3>Recommended action</h3>
           <p>{alert.recommended_action}</p>
         </div>
       </div>

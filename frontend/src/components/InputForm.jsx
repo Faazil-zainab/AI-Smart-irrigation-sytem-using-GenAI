@@ -24,7 +24,9 @@ const InputForm = ({ onSubmit, loading, formData, onFormDataChange }) => {
 
   return (
     <form className="input-form" onSubmit={handleSubmit}>
-      <h2>🌱 Irrigation Parameters</h2>
+      <div className="section-kicker">01 / Field inputs</div>
+      <h2>Set the field context</h2>
+      <p className="form-intro">Adjust the readings below to refine the recommendation.</p>
       
       <div className="form-group">
         <label htmlFor="temperature">Temperature (°C)</label>
@@ -106,7 +108,7 @@ const InputForm = ({ onSubmit, loading, formData, onFormDataChange }) => {
       </div>
 
       <button type="submit" disabled={loading} className="submit-button">
-        {loading ? '⏳ Analyzing...' : '📊 Get Recommendation'}
+        {loading ? 'Analyzing field...' : 'Run recommendation'}
       </button>
     </form>
   );

@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 import logging
 import os
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ class IrrigationDataPreprocessor:
         try:
             # Load dataset
             df = pd.read_csv(dataset_path)
+            df = self._normalize_columns(df)
             logger.info(f"Dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
             
             # Data cleaning
@@ -63,6 +65,22 @@ class IrrigationDataPreprocessor:
         except Exception as e:
             logger.error(f"Preprocessing error: {e}")
             raise
+
+    def _normalize_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Normalize column names to snake_case field names used by the pipeline."""
+
+        rename_map = {}
+
+        for column in df.columns:
+            normalized = column.strip().lower()
+            normalized = re.sub(r"\(.*?\)", "", normalized)
+            normalized = normalized.replace("%", "")
+            normalized = normalized.replace("°", "")
+            normalized = re.sub(r"[^a-z0-9]+", "_", normalized)
+            normalized = re.sub(r"_+", "_", normalized).strip("_")
+            rename_map[column] = normalized
+
+        return df.rename(columns=rename_map)
     
     def _clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """Clean dataset: handle missing values, outliers"""

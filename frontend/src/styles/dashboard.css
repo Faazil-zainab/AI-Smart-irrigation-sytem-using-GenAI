@@ -1,6 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+/* Fieldwise — global tokens and typography.
+   Display: Michroma. Text: Manrope. Telemetry: IBM Plex Mono. */
 
-/* Global Styles for AI Irrigation Dashboard */
+:root {
+  --void: #05070c;
+  --void-2: #0b0f18;
+  --surface: #0d131e;
+  --surface-2: #101827;
+  --regolith: #c9ccd3;
+  --dust: #8b909b;
+  --earth: #6fb6ff;
+  --sunlit: #f2e6c9;
+  --mint: #8fd6b4;
+  --amber: #f2b36b;
+  --coral: #ff8f7a;
+
+  --line: rgba(201, 204, 211, 0.14);
+  --line-strong: rgba(201, 204, 211, 0.26);
+
+  --font-display: 'Michroma', 'Eurostile', 'Arial Black', sans-serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  --gutter: clamp(18px, 6vw, 88px);
+  --shell: 1320px;
+  --radius: 6px;
+
+  /* Legacy aliases kept so every existing component inherits the new system. */
+  --primary-color: var(--earth);
+  --primary-dark: #4d94db;
+  --primary-light: var(--mint);
+  --secondary-color: var(--earth);
+  --accent-color: var(--sunlit);
+  --danger-color: var(--coral);
+  --warning-color: var(--amber);
+  --success-color: var(--mint);
+  --background-color: var(--void);
+  --surface-color: rgba(13, 19, 30, 0.78);
+  --card-background: rgba(13, 19, 30, 0.78);
+  --text-primary: var(--regolith);
+  --text-secondary: var(--dust);
+  --border-color: var(--line);
+  --shadow-sm: 0 10px 30px -18px rgba(0, 0, 0, 0.9);
+  --shadow-md: 0 26px 70px -34px rgba(0, 0, 0, 0.95);
+  --shadow-lg: 0 38px 100px -36px rgba(0, 0, 0, 1);
+  --transition: all 220ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
 
 * {
   margin: 0;
@@ -8,38 +52,13 @@
   box-sizing: border-box;
 }
 
-:root {
-  --primary-color: #167c50;
-  --primary-dark: #0f5b3b;
-  --primary-light: #44b57d;
-  --secondary-color: #1d4ed8;
-  --accent-color: #d97706;
-  --danger-color: #dc4c64;
-  --warning-color: #d97706;
-  --success-color: #16a34a;
-  --background-color: #eef4ef;
-  --surface-color: rgba(255, 255, 255, 0.78);
-  --card-background: rgba(255, 255, 255, 0.92);
-  --text-primary: #11211b;
-  --text-secondary: #5c6f68;
-  --border-color: rgba(17, 33, 27, 0.1);
-  --shadow-sm: 0 10px 24px rgba(17, 33, 27, 0.08);
-  --shadow-md: 0 18px 42px rgba(17, 33, 27, 0.12);
-  --shadow-lg: 0 26px 64px rgba(17, 33, 27, 0.18);
-  --transition: all 220ms ease;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Inter', 'Manrope', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-sans);
   background:
-    radial-gradient(circle at top left, rgba(22, 124, 80, 0.12), transparent 28%),
-    radial-gradient(circle at top right, rgba(29, 78, 216, 0.08), transparent 24%),
-    linear-gradient(180deg, #f7faf8 0%, #eef4ef 54%, #e7f0eb 100%);
-  color: var(--text-primary);
+    radial-gradient(70% 50% at 82% 0%, rgba(31, 55, 86, 0.22), transparent 62%),
+    radial-gradient(50% 45% at 0% 38%, rgba(13, 26, 42, 0.4), transparent 70%),
+    var(--void);
+  color: var(--regolith);
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -48,48 +67,192 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: transparent;
+  overflow-x: clip;
 }
 
-/* Scrollbar Styling */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Scrollbar — thin, instrument-panel grey. */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(17, 33, 27, 0.08);
+  background: #070a11;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary-light), var(--primary-dark));
+  background: #253247;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--primary-dark), var(--secondary-color));
+  background: #3a4d6a;
 }
 
-/* Loading Spinner */
+/* Shared instrumentation utilities. */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.shell {
+  width: min(var(--shell), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+.brackets {
+  background:
+    linear-gradient(currentColor, currentColor) top left / 14px 1px,
+    linear-gradient(currentColor, currentColor) top left / 1px 14px,
+    linear-gradient(currentColor, currentColor) top right / 14px 1px,
+    linear-gradient(currentColor, currentColor) top right / 1px 14px,
+    linear-gradient(currentColor, currentColor) bottom left / 14px 1px,
+    linear-gradient(currentColor, currentColor) bottom left / 1px 14px,
+    linear-gradient(currentColor, currentColor) bottom right / 14px 1px,
+    linear-gradient(currentColor, currentColor) bottom right / 1px 14px;
+  background-repeat: no-repeat;
+}
+
+.section-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--earth);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 40px;
+  margin-bottom: clamp(34px, 5vw, 64px);
+}
+
+.section-head h2 {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3.6vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.section-head p {
+  max-width: 36rem;
+  margin-top: 12px;
+  color: var(--dust);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.65;
+}
+
+.section-head .section-note {
+  max-width: 22rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(139, 144, 155, 0.72);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 1s cubic-bezier(0.2, 0.7, 0.1, 1),
+    transform 1s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: var(--sunlit);
+  color: var(--void);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+.spinner {
+  border: 1px solid rgba(201, 204, 211, 0.16);
+  border-top: 1px solid var(--earth);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.spinner {
-  border: 4px solid rgba(17, 33, 27, 0.08);
-  border-top: 4px solid var(--primary-color);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 20px auto;
-}
-
-/* Responsive tuning */
 @media (max-width: 768px) {
   :root {
-    --shadow-sm: 0 8px 18px rgba(17, 33, 27, 0.08);
-    --shadow-md: 0 14px 32px rgba(17, 33, 27, 0.12);
-    --shadow-lg: 0 20px 44px rgba(17, 33, 27, 0.16);
+    --shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.34);
+    --shadow-md: 0 14px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 44px rgba(0, 0, 0, 0.48);
   }
 }

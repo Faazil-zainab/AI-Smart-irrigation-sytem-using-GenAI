@@ -1,5 +1,6 @@
 import React from 'react';
 import './RecommendationCard.css';
+import { WaterDropVisual } from './FarmScene';
 
 /**
  * RecommendationCard Component
@@ -18,21 +19,22 @@ const RecommendationCard = ({ prediction, loading }) => {
   if (!prediction) {
     return (
       <div className="recommendation-card empty">
-        <p>📈 Fill the form and submit to see irrigation recommendations</p>
+        <p>Run the model to see the recommended irrigation volume.</p>
       </div>
     );
   }
 
   const getWaterRequirementColor = (value) => {
-    if (value < 10) return '#4CAF50';      // Green - Low
-    if (value < 20) return '#8BC34A';      // Light Green - Moderate
-    if (value < 30) return '#FFC107';      // Orange - High
-    return '#F44336';                      // Red - Critical
+    if (value < 10) return '#8fd6b4';      // Mint — low
+    if (value < 20) return '#6fb6ff';      // Earth blue — moderate
+    if (value < 30) return '#f2b36b';      // Amber — high
+    return '#ff8f7a';                      // Coral — critical
   };
 
   return (
     <div className="recommendation-card">
-      <h2>💧 Irrigation Recommendation</h2>
+      <div className="section-kicker">02 / Decision support</div>
+      <h2>Recommended irrigation</h2>
       
       <div className="recommendation-header">
         <div className="crop-info">
@@ -41,6 +43,7 @@ const RecommendationCard = ({ prediction, loading }) => {
       </div>
 
       <div className="water-requirement-display">
+        <WaterDropVisual level={Math.min(1, prediction.water_requirement_mm / 40)} />
         <div className="water-gauge">
           <svg viewBox="0 0 200 200">
             <circle
@@ -48,8 +51,8 @@ const RecommendationCard = ({ prediction, loading }) => {
               cy="100"
               r="90"
               fill="none"
-              stroke="#e0e0e0"
-              strokeWidth="8"
+              stroke="rgba(201, 204, 211, 0.12)"
+              strokeWidth="6"
             />
             <circle
               cx="100"
@@ -57,51 +60,55 @@ const RecommendationCard = ({ prediction, loading }) => {
               r="90"
               fill="none"
               stroke={getWaterRequirementColor(prediction.water_requirement_mm)}
-              strokeWidth="8"
+              strokeWidth="6"
+              strokeLinecap="round"
               strokeDasharray={`${(prediction.water_requirement_mm / 50) * 565} 565`}
               transform="rotate(-90 100 100)"
             />
             <text
               x="100"
-              y="100"
+              y="102"
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="32"
-              fontWeight="bold"
+              fontFamily="IBM Plex Mono, monospace"
+              fontSize="30"
+              fontWeight="500"
               fill={getWaterRequirementColor(prediction.water_requirement_mm)}
             >
               {prediction.water_requirement_mm.toFixed(1)}
             </text>
             <text
               x="100"
-              y="130"
+              y="128"
               textAnchor="middle"
-              fontSize="14"
-              fill="#666"
+              fontFamily="IBM Plex Mono, monospace"
+              fontSize="10"
+              letterSpacing="2"
+              fill="#8b909b"
             >
-              millimeters
+              MM
             </text>
           </svg>
         </div>
 
         <div className="recommendation-details">
           <div className="detail-item">
-            <span className="label">💧 Water Requirement:</span>
-            <span className="value">{prediction.water_requirement_mm.toFixed(2)} mm</span>
+            <span className="label">Water requirement</span>
+            <span className="value">{prediction.water_requirement_mm.toFixed(2)} mm/cycle</span>
           </div>
 
           <div className="detail-item">
-            <span className="label">🕐 Frequency:</span>
+            <span className="label">Frequency</span>
             <span className="value">Every {prediction.watering_frequency_days} days</span>
           </div>
 
           <div className="detail-item">
-            <span className="label">⏰ Best Time:</span>
+            <span className="label">Best time</span>
             <span className="value">{prediction.best_time_of_day}</span>
           </div>
 
-          <div className="detail-item">
-            <span className="label">✅ Confidence:</span>
+          <div className="detail-item detail-item-confidence">
+            <span className="label">Confidence</span>
             <div className="confidence-bar">
               <div
                 className="confidence-fill"
@@ -114,7 +121,7 @@ const RecommendationCard = ({ prediction, loading }) => {
       </div>
 
       <div className="explanation-box">
-        <h3>📋 Explanation</h3>
+        <h3>Why this works</h3>
         <p>{prediction.explanation}</p>
       </div>
     </div>

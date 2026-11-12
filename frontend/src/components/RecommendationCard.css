@@ -1,156 +1,252 @@
-/* Recommendation Card Styles */
+/* Recommended irrigation panel. */
 
 .recommendation-card {
-  background-color: var(--card-background);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: var(--shadow-md);
-  height: 100%;
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
-  overflow-y: auto;
+  height: 100%;
+  padding: clamp(20px, 2.2vw, 26px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(16, 24, 39, 0.84), rgba(8, 12, 20, 0.94));
+  box-shadow: var(--shadow-md);
 }
 
-.recommendation-card:hover:not(.empty):not(.loading) {
-  box-shadow: var(--shadow-lg);
+.recommendation-card .section-kicker {
+  margin-bottom: 12px;
 }
 
 .recommendation-card h2 {
-  color: var(--primary-color);
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin: 0 0 18px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .recommendation-card.empty,
 .recommendation-card.loading {
-  justify-content: center;
   align-items: center;
-  min-height: 300px;
-  color: var(--text-secondary);
-  font-style: italic;
+  justify-content: center;
+  min-height: 320px;
+  color: var(--dust);
+  text-align: center;
+}
+
+.recommendation-card.empty p,
+.recommendation-card.loading p {
+  max-width: 22rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  text-transform: uppercase;
 }
 
 .recommendation-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--border-color);
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
 }
 
 .crop-badge {
-  display: inline-block;
-  background-color: var(--primary-light);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.9rem;
+  display: inline-flex;
+  padding: 6px 9px;
+  border: 1px solid rgba(111, 182, 255, 0.32);
+  border-radius: 3px;
+  background: rgba(111, 182, 255, 0.09);
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .water-requirement-display {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: 100px minmax(0, 1fr);
   align-items: center;
+  gap: 14px 20px;
+  margin-bottom: 16px;
 }
 
 .water-gauge {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto;
+  width: 146px;
+  height: 146px;
+  margin-inline: auto;
+}
+
+.water-gauge svg {
+  width: 100%;
+  height: 100%;
 }
 
 .recommendation-details {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .detail-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border-color);
+  gap: 8px 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .detail-item .label {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-primary);
+  color: rgba(201, 204, 211, 0.68);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .detail-item .value {
-  color: var(--primary-color);
-  font-weight: 600;
-  font-size: 16px;
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.detail-item-confidence {
+  grid-template-columns: 1fr auto;
+}
+
+.detail-item-confidence .value {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .confidence-bar {
-  width: 100px;
-  height: 6px;
-  background-color: var(--border-color);
-  border-radius: 3px;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  height: 4px;
+  margin-top: 4px;
   overflow: hidden;
-  flex-grow: 1;
-  margin: 0 10px;
+  border-radius: 999px;
+  background: rgba(201, 204, 211, 0.12);
 }
 
 .confidence-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color), var(--success-color));
-  border-radius: 3px;
-  transition: width 0.5s ease;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--earth), var(--mint));
+  transition: width 500ms cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
 .explanation-box {
-  background-color: #f5f5f5;
-  border-left: 4px solid var(--primary-color);
-  padding: 12px;
-  border-radius: 4px;
-  margin-top: auto;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--earth);
+  background: rgba(111, 182, 255, 0.055);
 }
 
 .explanation-box h3 {
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  font-size: 18px;
-  font-weight: 600;
+  margin: 0 0 7px;
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .explanation-box p {
-  color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.5;
+  margin: 0;
+  color: rgba(201, 204, 211, 0.76);
+  font-size: 0.8125rem;
+  line-height: 1.65;
 }
 
-.recommendation-card::-webkit-scrollbar {
-  width: 8px;
+/* The water-drop instrument. */
+.water-drop-visual {
+  position: relative;
+  width: 96px;
+  height: 118px;
+  margin: auto;
 }
 
-.recommendation-card::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 120, 0.35);
-  border-radius: 999px;
+.drop-core {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  width: 56px;
+  height: 74px;
+  overflow: hidden;
+  transform: rotate(45deg);
+  border: 1px solid rgba(111, 182, 255, 0.72);
+  border-radius: 62% 38% 58% 42% / 48% 44% 56% 52%;
+  background: linear-gradient(150deg, rgba(111, 182, 255, 0.86), rgba(37, 99, 235, 0.5));
+  box-shadow:
+    0 0 28px rgba(111, 182, 255, 0.24),
+    inset 10px 0 16px rgba(255, 255, 255, 0.14);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+.drop-core::after {
+  position: absolute;
+  right: -12px;
+  bottom: calc(var(--drop-level) - 100%);
+  left: -12px;
+  height: 100%;
+  content: '';
+  border-radius: 45%;
+  background: rgba(143, 214, 180, 0.7);
+  transition: bottom 700ms ease;
+}
+
+.drop-ring {
+  position: absolute;
+  inset: 12px 8px 18px;
+  border: 1px solid rgba(111, 182, 255, 0.24);
+  border-radius: 50%;
+  animation: drop-orbit 5s linear infinite;
+}
+
+.ring-two {
+  inset: 2px 0 8px;
+  border-color: rgba(143, 214, 180, 0.16);
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+@keyframes drop-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop-ring {
+    animation: none;
+  }
+}
+
+@media (max-width: 1120px) {
   .water-requirement-display {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 96px 146px;
+  }
+}
+
+@media (max-width: 640px) {
+  .water-requirement-display {
+    grid-template-columns: 96px minmax(0, 1fr);
   }
 
   .water-gauge {
-    width: 120px;
-    height: 120px;
+    width: 128px;
+    height: 128px;
   }
 }

@@ -1,58 +1,92 @@
+/* Map-selected field location. */
+
 .location-picker-shell {
-  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(9, 18, 15, 0.9);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-  max-width: 680px;
-  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(5, 7, 12, 0.55);
 }
 
 .location-picker-header {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
   align-items: center;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(16, 24, 39, 0.7);
 }
 
 .location-picker-header h3 {
   margin: 0;
-  color: #ecfff4;
-  font-size: 18px;
-  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .location-picker-header p {
   margin: 4px 0 0;
-  color: #9fb5ab;
-  font-size: 14px;
+  color: var(--dust);
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 .location-picker-coords {
-  color: #9ae6c2;
-  font-size: 13px;
-  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .location-map {
-  height: 180px;
   width: 100%;
+  height: 210px;
+  background: #0a101a;
+  filter: grayscale(0.45) saturate(0.7) brightness(0.62) contrast(1.08);
+}
+
+.location-picker-shell .leaflet-container {
+  background: #0a101a;
+  font-family: var(--font-mono);
+}
+
+.location-picker-shell .leaflet-control-attribution {
+  background: rgba(5, 7, 12, 0.78) !important;
+  color: rgba(201, 204, 211, 0.54) !important;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.02em;
+}
+
+.location-picker-shell .leaflet-control-attribution a {
+  color: var(--earth) !important;
+}
+
+.location-picker-shell .leaflet-bar a,
+.location-picker-shell .leaflet-bar a:hover {
+  border-color: rgba(201, 204, 211, 0.14);
+  background: rgba(8, 12, 20, 0.9);
+  color: #fff;
+}
+
+.location-picker-shell .leaflet-bar a:hover {
+  background: rgba(111, 182, 255, 0.16);
 }
 
 @media (max-width: 768px) {
-  .location-picker-shell {
-    max-width: 100%;
-  }
-
   .location-map {
-    height: 150px;
+    height: 180px;
   }
 
   .location-picker-header {
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }

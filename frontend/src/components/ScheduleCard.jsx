@@ -10,9 +10,9 @@ const ScheduleCard = ({ prediction, alert }) => {
     return (
       <div className="schedule-card empty d-flex align-items-center justify-content-center">
         <div className="text-center schedule-empty-wrap">
-          <div className="display-6 mb-2">📅</div>
-          <h5 className="mb-1">No Schedule Yet</h5>
-          <p className="mb-0">Watering schedule will appear here after prediction.</p>
+          <div className="display-6 mb-2" aria-hidden="true">○</div>
+          <h5 className="mb-1">No schedule yet</h5>
+          <p className="mb-0">The watering schedule appears here after a prediction.</p>
         </div>
       </div>
     );
@@ -34,18 +34,18 @@ const ScheduleCard = ({ prediction, alert }) => {
   };
 
   const getAlertColor = () => {
-    if (!alert) return '#4CAF50';
+    if (!alert) return '#8fd6b4';
     switch (alert.severity.toLowerCase()) {
       case 'critical':
-        return '#D32F2F';
+        return '#ff8f7a';
       case 'high':
-        return '#F57C00';
+        return '#f2b36b';
       case 'medium':
-        return '#FBC02D';
+        return '#f2e6c9';
       case 'low':
-        return '#4CAF50';
+        return '#8fd6b4';
       default:
-        return '#666';
+        return '#8b909b';
     }
   };
 
@@ -54,7 +54,7 @@ const ScheduleCard = ({ prediction, alert }) => {
   return (
     <div className="schedule-card">
       <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-        <h2 className="mb-0">📅 Watering Schedule</h2>
+        <h2 className="mb-0">Watering schedule</h2>
         <span className="badge rounded-pill schedule-status-badge">Next 14 Days Plan</span>
       </div>
 
@@ -65,7 +65,7 @@ const ScheduleCard = ({ prediction, alert }) => {
         </div>
         <div className="summary-item col-12 col-md-4">
           <span className="label">Water per cycle:</span>
-          <span className="value">{prediction.water_requirement_mm.toFixed(2)} mm</span>
+          <span className="value">{prediction.water_requirement_mm.toFixed(2)} mm/cycle</span>
         </div>
         <div className="summary-item col-12 col-md-4">
           <span className="label">Recommended time:</span>
@@ -76,7 +76,7 @@ const ScheduleCard = ({ prediction, alert }) => {
       <div className="schedule-calendar">
         <div className="d-flex justify-content-between align-items-center mb-2">
           <h3 className="mb-0">Next 2 Weeks</h3>
-          <small className="text-muted">Tap a day to inspect slot</small>
+          <small className="text-muted">Plan window · next 14 days</small>
         </div>
         <div className="calendar-grid">
           {schedule.map((date, index) => (
@@ -88,28 +88,24 @@ const ScheduleCard = ({ prediction, alert }) => {
                   day: 'numeric'
                 })}
               </div>
-              <div
+              <span
                 className="irrigate-indicator"
-                style={{
-                  backgroundColor: getAlertColor(),
-                  opacity: 0.8
-                }}
-              >
-                💧
-              </div>
-              <div className="time">{prediction.best_time_of_day.split(' ')[0]} AM</div>
+                style={{ backgroundColor: getAlertColor() }}
+                aria-hidden="true"
+              />
+              <div className="time">{prediction.best_time_of_day}</div>
             </div>
           ))}
         </div>
       </div>
 
       <div className="schedule-tips">
-        <h3>⚡ Schedule Management Tips</h3>
+        <h3>Schedule management tips</h3>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">Set phone reminders for scheduled watering time</li>
           <li className="list-group-item">Monitor soil moisture daily to adjust schedule if needed</li>
           <li className="list-group-item">Check weather forecast before watering day</li>
-          <li className="list-group-item">Skip watering if recent rainfall is above {(prediction.water_requirement_mm / 2).toFixed(2)}mm</li>
+          <li className="list-group-item">Recheck the plan after rainfall; the model already includes the reported rain in this mm/cycle recommendation.</li>
           <li className="list-group-item">Inspect drip lines weekly for clogs or breaks</li>
         </ul>
       </div>

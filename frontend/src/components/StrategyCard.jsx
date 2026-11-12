@@ -18,37 +18,56 @@ const StrategyCard = ({ strategy, loading }) => {
   if (!strategy) {
     return (
       <div className="strategy-card empty">
-        <p>💡 Optimization strategies will appear here</p>
+        <p>The efficiency plan will appear here after a recommendation.</p>
       </div>
     );
   }
 
   return (
     <div className="strategy-card">
-      <h2>🌱 Optimization Strategies</h2>
+      <div className="section-kicker">03 / Efficiency plan</div>
+      <h2>Use less. Grow well.</h2>
 
       {/* Water Savings Section */}
       <div className="savings-section">
-        <h3>💰 Water & Cost Savings</h3>
+        <h3>Water use & savings</h3>
         <div className="savings-metrics">
           <div className="metric">
-            <div className="metric-value" style={{ color: '#4CAF50' }}>
+            <div className="metric-value" style={{ color: 'var(--mint)' }}>
               {strategy.potential_water_saving_percent.toFixed(1)}%
             </div>
-            <div className="metric-label">Water Saved</div>
+            <div className="metric-label">Efficiency gain</div>
           </div>
           <div className="metric">
-            <div className="metric-value" style={{ color: '#2196F3' }}>
-              {strategy.expected_cost_savings_percent.toFixed(1)}%
+            <div className="metric-value" style={{ color: 'var(--earth)' }}>
+              {strategy.water_saved_mm.toFixed(2)} mm
             </div>
-            <div className="metric-label">Cost Reduction</div>
+            <div className="metric-label">Saved per cycle</div>
           </div>
         </div>
+        <div className="water-volume-grid">
+          <div>
+            <span className="metric-label">Drip applied</span>
+            <strong>{strategy.recommended_water_mm.toFixed(2)} mm</strong>
+            <small>{strategy.recommended_water_m3_per_hectare.toFixed(2)} m³/ha</small>
+          </div>
+          <div>
+            <span className="metric-label">Conventional applied</span>
+            <strong>{strategy.conventional_water_mm.toFixed(2)} mm</strong>
+            <small>{(strategy.conventional_water_mm * 10).toFixed(2)} m³/ha</small>
+          </div>
+          <div>
+            <span className="metric-label">Saved at field scale</span>
+            <strong>{strategy.water_saved_l_per_m2.toFixed(2)} L/m²</strong>
+            <small>{strategy.water_saved_m3_per_hectare.toFixed(2)} m³/ha</small>
+          </div>
+        </div>
+        <p className="calculation-basis">{strategy.calculation_basis} Cost savings are not estimated without a local water and energy tariff.</p>
       </div>
 
       {/* Drip Irrigation Setup */}
       <div className="drip-setup-section">
-        <h3>🚰 Recommended Drip Irrigation Setup</h3>
+        <h3>Recommended drip setup</h3>
         <div className="drip-details">
           <div className="detail-row">
             <span className="label">System Type:</span>
@@ -79,7 +98,7 @@ const StrategyCard = ({ strategy, loading }) => {
 
       {/* Conservation Tips */}
       <div className="tips-section">
-        <h3>💧 Water Conservation Tips</h3>
+        <h3>Water conservation tips</h3>
         <ul className="tips-list">
           {strategy.water_conservation_tips.map((tip, index) => (
             <li key={index} className="tip-item">

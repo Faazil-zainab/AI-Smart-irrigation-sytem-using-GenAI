@@ -63,6 +63,11 @@ class IrrigationPredictionRequest(BaseModel):
         default=None,
         description="Estimated soil erosion risk from weather conditions"
     )
+    predicted_water_requirement_mm: Optional[float] = Field(
+        default=None,
+        ge=0,
+        description="Model-predicted net crop water requirement in mm, used by optimization calculations"
+    )
     
 class IrrigationPredictionResponse(BaseModel):
     """Response model for irrigation prediction"""
@@ -177,5 +182,37 @@ class OptimizationStrategyResponse(BaseModel):
     expected_cost_savings_percent: float = Field(
         ...,
         description="Expected cost savings percentage"
+    )
+    recommended_water_mm: float = Field(
+        ...,
+        description="Recommended applied irrigation depth per cycle in mm"
+    )
+    conventional_water_mm: float = Field(
+        ...,
+        description="Estimated conventional applied irrigation depth per cycle in mm"
+    )
+    water_saved_mm: float = Field(
+        ...,
+        description="Estimated water saved per cycle in mm"
+    )
+    recommended_water_l_per_m2: float = Field(
+        ...,
+        description="Recommended water volume per cycle in litres per square metre"
+    )
+    water_saved_l_per_m2: float = Field(
+        ...,
+        description="Estimated water saved per cycle in litres per square metre"
+    )
+    recommended_water_m3_per_hectare: float = Field(
+        ...,
+        description="Recommended water volume per cycle in cubic metres per hectare"
+    )
+    water_saved_m3_per_hectare: float = Field(
+        ...,
+        description="Estimated water saved per cycle in cubic metres per hectare"
+    )
+    calculation_basis: str = Field(
+        ...,
+        description="Efficiency assumptions used for the volume and saving calculation"
     )
     

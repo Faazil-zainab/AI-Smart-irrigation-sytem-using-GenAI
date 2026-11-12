@@ -4,12 +4,16 @@ Optimization Service - Water-saving strategies and drip irrigation recommendatio
 
 import logging
 from typing import Dict, Any, List
+from numbers import Real
 from schemas.irrigation_schema import IrrigationPredictionRequest, OptimizationStrategyResponse
 
 logger = logging.getLogger(__name__)
 
 class OptimizationService:
     """Service for generating water-saving optimization strategies"""
+
+    DRIP_EFFICIENCY = 0.90
+    CONVENTIONAL_EFFICIENCY = 0.60
     
     async def generate_optimization_strategy(
         self,
@@ -25,7 +29,8 @@ class OptimizationService:
             Optimization strategy with water saving tips and drip irrigation setup
         """
         try:
-            water_savings = self._calculate_water_savings(request)
+            water_metrics = self._calculate_water_metrics(request)
+            water_savings = water_metrics["saving_percent"]
             drip_setup = self._generate_drip_setup(request)
             tips = self._generate_tips(request)
             
@@ -35,31 +40,51 @@ class OptimizationService:
                 potential_water_saving_percent=water_savings,
                 drip_irrigation_setup=drip_setup,
                 water_conservation_tips=tips,
-                expected_cost_savings_percent=water_savings * 0.5  # Cost savings approximately 50% of water savings
+                expected_cost_savings_percent=water_savings,
+                recommended_water_mm=water_metrics["recommended_mm"],
+                conventional_water_mm=water_metrics["conventional_mm"],
+                water_saved_mm=water_metrics["saved_mm"],
+                recommended_water_l_per_m2=water_metrics["recommended_mm"],
+                water_saved_l_per_m2=water_metrics["saved_mm"],
+                recommended_water_m3_per_hectare=water_metrics["recommended_mm"] * 10,
+                water_saved_m3_per_hectare=water_metrics["saved_mm"] * 10,
+                calculation_basis=(
+                    "Per cycle: model-predicted net crop demand applied at "
+                    "90% drip efficiency versus 60% conventional efficiency. "
+                    "1 mm equals 1 L/m² or 10 m³/ha."
+                )
             )
         except Exception as e:
             logger.error(f"Optimization error: {e}")
             raise
     
-    def _calculate_water_savings(self, request: IrrigationPredictionRequest) -> float:
-        """
-        Calculate potential water savings from optimization
-        Assuming drip irrigation vs traditional flooding
-        """
-        # Base savings from drip irrigation
-        base_savings = 40  # 40-50% typical savings
-        
-        # Additional savings based on conditions
-        if request.humidity > 70:
-            base_savings += 5  # High humidity - less water needed
-        
-        if request.rainfall > 10:
-            base_savings += 5  # Recent rain - can reduce frequency
-        
-        if request.temperature < 20:
-            base_savings += 3  # Cooler temps - less evaporation
-        
-        return min(base_savings, 60)  # Cap at 60% savings
+    def _calculate_water_metrics(self, request: IrrigationPredictionRequest) -> Dict[str, float]:
+        """Convert the model's net demand into comparable applied water volumes."""
+        recommendation = request.predicted_water_requirement_mm
+        if recommendation is None:
+            raise ValueError(
+                "predicted_water_requirement_mm is required for an accurate water-saving calculation"
+            )
+        if isinstance(recommendation, bool) or not isinstance(recommendation, Real):
+            raise ValueError("predicted_water_requirement_mm must be numeric")
+
+        recommended_mm = max(0.0, float(recommendation))
+        conventional_mm = recommended_mm * (
+            self.DRIP_EFFICIENCY / self.CONVENTIONAL_EFFICIENCY
+        )
+        saved_mm = max(0.0, conventional_mm - recommended_mm)
+        saving_percent = (
+            (saved_mm / conventional_mm) * 100
+            if conventional_mm > 0
+            else 0.0
+        )
+
+        return {
+            "recommended_mm": round(recommended_mm, 2),
+            "conventional_mm": round(conventional_mm, 2),
+            "saved_mm": round(saved_mm, 2),
+            "saving_percent": round(saving_percent, 1),
+        }
     
     def _generate_drip_setup(self, request: IrrigationPredictionRequest) -> Dict[str, Any]:
         """Generate drip irrigation setup recommendations"""
