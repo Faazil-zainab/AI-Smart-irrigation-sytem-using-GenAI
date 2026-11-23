@@ -2,7 +2,7 @@
 
 .input-form {
   position: relative;
-  padding: clamp(20px, 2.4vw, 28px);
+  padding: clamp(18px, 2vw, 22px);
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
@@ -35,7 +35,7 @@
 }
 
 .form-intro {
-  margin: 0 0 24px;
+  margin: 0 0 16px;
   color: var(--dust);
   font-size: 0.8125rem;
   line-height: 1.6;
@@ -43,7 +43,7 @@
 
 .form-group {
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .form-group label {

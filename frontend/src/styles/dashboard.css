@@ -161,7 +161,7 @@ canvas {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px 40px;
-  margin-bottom: clamp(34px, 5vw, 64px);
+  margin-bottom: clamp(20px, 3vw, 36px);
 }
 
 .section-head h2 {
